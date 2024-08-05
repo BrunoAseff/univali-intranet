@@ -1,0 +1,56 @@
+ <svg
+      className="absolute bg-cover"
+      xmlns="http://www.w3.org/2000/svg"
+      version="1.1"
+      xmlnsXlink="http://www.w3.org/1999/xlink"
+      xmlnssvgjs="http://svgjs.dev/svgjs"
+      viewBox="0 0 800 450"
+      opacity="0.74"
+    >
+      <defs>
+        <filter
+          id="bbblurry-filter"
+          x="-100%"
+          y="-100%"
+          width="400%"
+          height="400%"
+          filterUnits="objectBoundingBox"
+          primitiveUnits="userSpaceOnUse"
+          colorInterpolationFilters="sRGB"
+        >
+          <feGaussianBlur
+            stdDeviation="111"
+            x="0%"
+            y="0%"
+            width="100%"
+            height="100%"
+            in="SourceGraphic"
+            edgeMode="none"
+            result="blur"
+          ></feGaussianBlur>
+        </filter>
+      </defs>
+      <g filter="url(#bbblurry-filter)">
+        <ellipse
+          rx="39"
+          ry="256"
+          cx="186.61962775874906"
+          cy="272.44963311633614"
+          fill="hsla(212, 72%, 59%, 1.00)"
+        ></ellipse>
+        <ellipse
+          rx="39"
+          ry="256"
+          cx="649.2031807006564"
+          cy="197.09147453559444"
+          fill="hsla(212, 72%, 59%, 1.00)"
+        ></ellipse>
+        <ellipse
+          rx="39"
+          ry="256"
+          cx="234.3300779027744"
+          cy="371.0952978538985"
+          fill="hsla(212, 72%, 59%, 1.00)"
+        ></ellipse>
+      </g>
+    </svg>

@@ -1,13 +1,19 @@
 "use client";
 
-import { Image } from "@nextui-org/image";
-import { Button } from "@nextui-org/button";
-import { Input } from "@nextui-org/input";
-import { FaRegEye } from "react-icons/fa";
-import { FaRegEyeSlash } from "react-icons/fa6";
+import { Image } from "@nextui-org/react";
+import { Button } from "@nextui-org/react";
+import { Input } from "@nextui-org/react";
+
 import { useState } from "react";
 import { Link } from "@nextui-org/react";
-import { FaInstagram } from "react-icons/fa6";
+import {
+  Eye,
+  EyeSlash,
+  InstagramLogo,
+  FacebookLogo,
+  YoutubeLogo,
+  LinkedinLogo,
+} from "@phosphor-icons/react";
 
 export default function Home() {
   const [isVisible, setIsVisible] = useState(false);
@@ -47,9 +53,15 @@ export default function Home() {
               aria-label="toggle password visibility"
             >
               {isVisible ? (
-                <FaRegEyeSlash className="text-2xl text-default-400 pointer-events-none" />
+                <EyeSlash
+                  size={32}
+                  className="text-default-400 pointer-events-none"
+                />
               ) : (
-                <FaRegEye className="text-2xl text-default-400 pointer-events-none" />
+                <Eye
+                  size={32}
+                  className="text-default-400 pointer-events-none"
+                />
               )}
             </button>
           }
@@ -72,9 +84,18 @@ export default function Home() {
             Central de Atendimento <strong> 0800 723 1300</strong>
           </p>
 
-          <div className="flex mt-12 text-center w-full items-center justify-center ">
+          <div className="flex mt-12 text-center w-full items-center justify-center gap-4">
             <Link isExternal href="https://www.instagram.com/UnivaliOnline/">
-              <FaInstagram className="scale-150" />
+              <InstagramLogo size={32} />
+            </Link>
+            <Link isExternal href="https://www.facebook.com/univali">
+              <FacebookLogo size={32} />
+            </Link>
+            <Link isExternal href="https://www.linkedin.com/school/univali/">
+              <LinkedinLogo size={32} />
+            </Link>
+            <Link isExternal href="https://www.youtube.com/univalivideos">
+              <YoutubeLogo size={32} />
             </Link>
           </div>
         </div>
