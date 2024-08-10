@@ -22,7 +22,7 @@ export default function Home() {
 
   return (
     <div className="w-full h-screen flex">
-      <div className="w-1/2 bg-[conic-gradient(at_left,_var(--tw-gradient-stops))] from-sky-100 via-blue-300 to-blue-500 flex items-center justify-center">
+      <div className="w-1/2 hidden md:flex bg-[conic-gradient(at_left,_var(--tw-gradient-stops))] from-sky-100 via-blue-300 to-blue-500  items-center justify-center">
         <Image
           radius="none"
           width={200}
@@ -31,8 +31,18 @@ export default function Home() {
           src="/univali.png"
         />
       </div>
-      <div className=" w-1/2 flex items-start justify-center flex-col gap-4 p-12 grow	">
-        <h1 className="font-bold mb-6	 text-4xl	">Bem-vindo!</h1>
+      <div className=" w-1/2 flex items-start justify-center flex-col gap-4 p-12 grow">
+        <div className=" w-full flex justify-center items-center">
+          <Image
+            radius="none"
+            width={200}
+            height={142}
+            alt="Logo da Univali"
+            src="/univali.png"
+            className="md:hidden scale-50 sm:scale-80 md:scale-100 "
+          />
+        </div>
+        <h1 className="font-bold  md:mb-6	md:text-4xl  text-2xl">Bem-vindo!</h1>
         <Input
           className="max-w-lg	"
           type="email"
@@ -53,12 +63,12 @@ export default function Home() {
               aria-label="toggle password visibility"
             >
               {isVisible ? (
-                <EyeSlash
+                <Eye
                   size={32}
                   className="text-default-400 pointer-events-none"
                 />
               ) : (
-                <Eye
+                <EyeSlash
                   size={32}
                   className="text-default-400 pointer-events-none"
                 />

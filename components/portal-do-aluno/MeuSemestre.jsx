@@ -102,7 +102,7 @@ export default function MeuSemestre() {
     <Card
       radius="sm"
       shadow="none"
-      className="flex flex-wrap mt-5 mr-10 max-w-screen-sm min-h-96 bg-background p-5"
+      className=" flex flex-wrap mt-5 mr-10 max-w-screen-sm min-h-96 bg-background p-5"
     >
       <CardHeader>
         <strong>MEU SEMESTRE</strong>
