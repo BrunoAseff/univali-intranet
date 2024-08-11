@@ -17,12 +17,7 @@ import {
   Chip,
   Link,
 } from "@nextui-org/react";
-import {
-  BookOpenText,
-  CalendarBlank,
-  Exam,
-  ListDashes,
-} from "@phosphor-icons/react";
+import { BookOpenText, CalendarBlank, Exam } from "@phosphor-icons/react";
 import { disciplines } from "@/database";
 
 const getRandomStatus = () => {
@@ -102,7 +97,7 @@ export default function MeuSemestre() {
     <Card
       radius="sm"
       shadow="none"
-      className=" flex flex-wrap mt-5 mr-10 max-w-screen-sm min-h-96 bg-background p-5"
+      className=" flex flex-wrap md:mt-5 md:mr-10 max-w-screen-sm min-h-96 bg-background md:p-5"
     >
       <CardHeader>
         <strong>MEU SEMESTRE</strong>

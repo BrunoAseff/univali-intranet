@@ -36,8 +36,9 @@ export default function SelectCourse() {
   console.log("selectedCourse:", selectedCourse);
 
   return (
-    <div className="bg-background flex-col md:flex-row flex w-full flex-wrap md:flex-nowrap gap-4 items-center justify-center">
+    <div className="bg-background flex-col md:flex-row flex w-full flex-wrap md:flex-nowrap gap-6 items-center ">
       <Select
+        variant="underlined"
         color="primary"
         label="Selecione o seu curso"
         className="max-w-xs"
@@ -52,22 +53,33 @@ export default function SelectCourse() {
       </Select>
 
       {courseDetails && (
-        <div className="flex gap-6">
-          <div className="flex flex-col md:flex-row  gap-2">
-            <p>Id do curso: </p>
-            <Chip radius="sm">{courseDetails.id}</Chip>
+        <div className="flex gap-6 md:gap-10 ">
+          <div className="flex flex-col md:flex-row gap-2 z-50 p-2 rounded-lg items-center">
+            <p className=" text-nowrap z-50">Id do curso: </p>
+            <Chip variant="bordered" color="primary" radius="sm">
+              {courseDetails.id}
+            </Chip>
           </div>
-          <div className="flex flex-col md:flex-row gap-2">
-            <p>Graduação: </p> <Chip radius="sm"> {courseDetails.degree}</Chip>
+          <div className="flex flex-col md:flex-row gap-2 z-50 p-2 rounded-lg items-center">
+            <p className="z-50">Graduação: </p>{" "}
+            <Chip variant="bordered" color="primary" radius="sm">
+              {" "}
+              {courseDetails.degree}
+            </Chip>
           </div>
 
-          <div className="flex flex-col md:flex-row gap-2">
-            <p> Modo: </p> <Chip radius="sm">{courseDetails.mode}</Chip>
+          <div className="flex flex-col md:flex-row  gap-2 z-50 p-2 rounded-lg items-center">
+            <p className="z-50"> Modo: </p>{" "}
+            <Chip variant="bordered" color="primary" radius="sm">
+              {courseDetails.mode}
+            </Chip>
           </div>
           {courseDetails.special && (
-            <div className="flex flex-col md:flex-row gap-2">
-              <p>Especial:</p>
-              <Chip radius="sm">{courseDetails.special}</Chip>
+            <div className="flex flex-col md:flex-row gap-2 z-50 p-2 rounded-lg items-center">
+              <p className="z-50">Especial:</p>
+              <Chip variant="bordered" color="primary" radius="sm">
+                {courseDetails.special}
+              </Chip>
             </div>
           )}
         </div>
