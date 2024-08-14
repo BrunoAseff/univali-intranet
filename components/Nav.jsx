@@ -40,11 +40,12 @@ export default function Nav() {
   return (
     <div className="flex w-full flex-grow shrink-0">
       <Navbar
+        className="w-full m-0 flex space-between"
         isBordered
         isMenuOpen={isMenuOpen}
         onMenuOpenChange={setIsMenuOpen}
       >
-        <NavbarContent className="sm:hidden" justify="start">
+        <NavbarContent className=" sm:hidden" justify="start">
           <NavbarMenuToggle
             aria-label={isMenuOpen ? "Fechar menu" : "Abrir menu"}
           />

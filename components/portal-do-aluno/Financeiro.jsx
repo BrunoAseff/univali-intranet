@@ -62,7 +62,7 @@ export default function Financeiro() {
     <Card
       radius="sm"
       shadow="none"
-      className="flex flex-wrap mt-5  mr-10 max-w-screen-sm bg-background p-5"
+      className="flexflex-wrap mt-5  mr-10 max-w-screen-sm  p-5"
     >
       <CardHeader>
         <strong>FINANCEIRO</strong>

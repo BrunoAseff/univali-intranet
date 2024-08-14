@@ -36,7 +36,7 @@ export default function SelectCourse() {
   console.log("selectedCourse:", selectedCourse);
 
   return (
-    <div className="bg-background flex-col md:flex-row flex w-full flex-wrap md:flex-nowrap gap-6 items-center ">
+    <div className="bg-transparent flex-col md:flex-row flex w-full flex-wrap md:flex-nowrap gap-6 items-center ">
       <Select
         variant="underlined"
         color="primary"

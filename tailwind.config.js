@@ -16,6 +16,10 @@ module.exports = {
       opacity: {
         74: "0.74",
       },
+      colors: {
+        backTry: "#eff6ff",
+        darkCard: "#2563eb",
+      },
     },
 
     darkMode: "class",
