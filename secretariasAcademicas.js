@@ -1,4 +1,4 @@
-const secretariasAcademicas = [
+export const secretariasAcademicas = [
   {
     campus: "Campus Balneário Camboriú",
     endereco:
