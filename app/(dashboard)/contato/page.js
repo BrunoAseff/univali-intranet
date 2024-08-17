@@ -12,8 +12,8 @@ import {
   TableHeader,
   TableBody,
 } from "@nextui-org/react";
-import { contatosUteis } from "@/contatosUteis";
-import { secretariasAcademicas } from "@/secretariasAcademicas";
+import { contatosUteis } from "../../../contatosUteis";
+import { secretariasAcademicas } from "../../../secretariasAcademicas";
 export default function Home() {
   return (
     <div className="mt-10 flex w-full flex-col items-center">
