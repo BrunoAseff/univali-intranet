@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Card, CardBody, CardHeader, Link, Skeleton } from "@nextui-org/react";
+import { Student } from "@phosphor-icons/react";
 
 export default function Bolsas() {
   const [loading, setLoading] = useState(true);
@@ -12,8 +13,8 @@ export default function Bolsas() {
 
   if (loading) {
     return (
-      <Card className=" w-[300px] space-y-5 mt-5 p-4" radius="sm">
-        <Skeleton className=" rounded-lg">
+      <Card className="mt-5 w-[300px] space-y-5 p-4" radius="sm">
+        <Skeleton className="rounded-lg">
           <div className="h-24 rounded-lg bg-default-300"></div>
         </Skeleton>
         <div className="space-y-3">
@@ -33,11 +34,13 @@ export default function Bolsas() {
 
   return (
     <Card
-      radius="sm"
+      radius="lg"
       shadow="none"
-      className="flexflex-wrap mt-5 min-w-[300px] min-h-[300px]  mr-5 max-w-xs p-5"
+      className="mr-5 mt-5 flex min-h-[300px] min-w-[300px] max-w-xs flex-wrap p-5"
     >
-      <CardHeader>
+      <CardHeader className="flex w-full flex-col items-center justify-center gap-2">
+        <Student size={45} color="#006FEE" weight="fill" />
+
         <strong>BOLSAS</strong>
       </CardHeader>
 

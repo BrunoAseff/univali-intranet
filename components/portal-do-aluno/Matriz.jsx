@@ -1,31 +1,6 @@
 import { useState, useEffect } from "react";
-import {
-  Tabs,
-  Tab,
-  Card,
-  CardBody,
-  CardHeader,
-  Skeleton,
-  Table,
-  TableHeader,
-  TableColumn,
-  TableBody,
-  TableCell,
-  TableRow,
-  Chip,
-  Link,
-  Button,
-  Select,
-  SelectItem,
-} from "@nextui-org/react";
-import {
-  CalendarBlank,
-  Exam,
-  ListDashes,
-  Receipt,
-  Signature,
-  TipJar,
-} from "@phosphor-icons/react";
+import { Card, CardBody, CardHeader, Skeleton, Link } from "@nextui-org/react";
+import { ListDashes } from "@phosphor-icons/react";
 
 export default function Matriz() {
   const [selected, setSelected] = useState("Notas");
@@ -39,8 +14,8 @@ export default function Matriz() {
 
   if (loading) {
     return (
-      <Card className=" w-[300px] space-y-5 mt-5 p-4" radius="sm">
-        <Skeleton className=" rounded-lg">
+      <Card className="mt-5 w-[300px] space-y-5 p-4" radius="sm">
+        <Skeleton className="rounded-lg">
           <div className="h-24 rounded-lg bg-default-300"></div>
         </Skeleton>
         <div className="space-y-3">
@@ -60,11 +35,13 @@ export default function Matriz() {
 
   return (
     <Card
-      radius="sm"
+      radius="lg"
       shadow="none"
-      className="flexflex-wrap mt-5 min-w-[300px] min-h-[300px]  mr-5 max-w-xs p-5"
+      className="mr-5 mt-5 flex min-h-[300px] min-w-[300px] max-w-xs flex-wrap p-5"
     >
-      <CardHeader>
+      <CardHeader className="flex w-full flex-col items-center justify-center gap-2">
+        <ListDashes size={45} color="#006FEE" weight="fill" />
+
         <strong>MATRIZ</strong>
       </CardHeader>
 

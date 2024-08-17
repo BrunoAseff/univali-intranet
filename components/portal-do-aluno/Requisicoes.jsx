@@ -24,6 +24,7 @@ import {
   ListDashes,
   Receipt,
   Signature,
+  StackPlus,
   TipJar,
 } from "@phosphor-icons/react";
 
@@ -60,11 +61,13 @@ export default function Requisicoes() {
 
   return (
     <Card
-      radius="sm"
+      radius="lg"
       shadow="none"
-      className="flexflex-wrap mt-5 min-w-[300px] min-h-[300px]  mr-5 max-w-xs p-5"
+      className="flex flex-wrap mt-5 min-w-[300px] min-h-[300px]  mr-5 max-w-xs p-5"
     >
-      <CardHeader>
+      <CardHeader className="w-full flex flex-col items-center justify-center gap-2">
+        <StackPlus size={45} color="#006FEE" weight="fill" />
+
         <strong>REQUISIÇÕES</strong>
       </CardHeader>
 
