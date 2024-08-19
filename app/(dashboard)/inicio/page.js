@@ -90,7 +90,7 @@ export default function Home() {
               <ModalHeader className="flex flex-col gap-1">
                 Assinar publicação por assunto
               </ModalHeader>
-              <ModalBody>
+              <ModalBody className="max-h-[400px]">
                 <div className="flex max-h-[600px] flex-col gap-1 overflow-auto">
                   {checkboxOptions.map((option) => (
                     <Checkbox

@@ -40,6 +40,9 @@ import {
   Eye,
   EyeSlash,
 } from "@phosphor-icons/react";
+import HelpModal from "./Modais/HelpModal";
+import { DataModal } from "./Modais/DataModal";
+import ConfigModal from "./Modais/ConfigModal";
 
 export default function Nav() {
   const [isVisible, setIsVisible] = useState(false);
@@ -162,13 +165,13 @@ export default function Nav() {
         </NavbarContent>
 
         <NavbarContent justify="end">
-          <h1 className="hidden lg:flex">{config.userName}</h1>
+          <h1 className="hidden lg:flex">{config[0].userName}</h1>
           <Dropdown backdrop="blur" placement="bottom-end">
             <DropdownTrigger>
               <Avatar
                 className="hover:cursor-pointer"
                 isBordered
-                src={config.src}
+                src={config[0].src}
               />
             </DropdownTrigger>
             <DropdownMenu aria-label="Ações de perfil" variant="flat">
@@ -217,220 +220,29 @@ export default function Nav() {
         </NavbarMenu>
       </Navbar>
 
-      <Modal size="3xl" isOpen={isConfigOpen} onOpenChange={onConfigOpenChange}>
-        <ModalContent>
-          {(onClose) => (
-            <>
-              <ModalHeader className="flex flex-col gap-1">
-                Configurações
-              </ModalHeader>
-              <ModalBody>
-                <Table className="max-h-[600px]">
-                  <TableHeader>
-                    <TableColumn>Configurações de conta</TableColumn>
-                    <TableColumn></TableColumn>
-                  </TableHeader>
-                  <TableBody>
-                    <TableRow>
-                      <TableCell className="font-semibold">
-                        Nome de usuário:{" "}
-                      </TableCell>
-                      <TableCell>
-                        <Input
-                          disabled={!isEditing}
-                          value={"Nome do Aluno"}
-                          variant="underlined"
-                          onChange={(e) => {}}
-                        />
-                      </TableCell>
-                    </TableRow>
+      <ConfigModal
+        isOpen={isConfigOpen}
+        onOpenChange={onConfigOpenChange}
+        isEditing={isEditing}
+        config={config}
+        handleEdit={handleEdit}
+        handleSave={handleSave}
+        handleInputChange={handleInputChange}
+        setIsVisible={setIsVisible}
+        isVisible={isVisible}
+      />
 
-                    <TableRow>
-                      <TableCell className="font-semibold">Senha: </TableCell>
-                      <TableCell>
-                        <Input
-                          className="max-w-lg"
-                          label="Senha"
-                          value={"SenhaAleatoria123456"}
-                          disabled={!isEditing}
-                          variant="underlined"
-                          endContent={
-                            <button
-                              className="focus:outline-none"
-                              type="button"
-                              onClick={() => setIsVisible(!isVisible)}
-                              aria-label="toggle password visibility"
-                            >
-                              {isVisible ? (
-                                <Eye
-                                  size={32}
-                                  className="pointer-events-none text-default-400"
-                                />
-                              ) : (
-                                <EyeSlash
-                                  size={32}
-                                  className="pointer-events-none text-default-400"
-                                />
-                              )}
-                            </button>
-                          }
-                          type={isVisible ? "text" : "password"}
-                          onChange={(e) => {}}
-                        />
-                      </TableCell>
-                    </TableRow>
+      <DataModal
+        isOpen={isDataOpen}
+        onOpenChange={onDataOpenChange}
+        isEditing={isEditing}
+        dados={dados}
+        handleEdit={handleEdit}
+        handleSave={handleSave}
+        handleInputChange={handleInputChange}
+      />
 
-                    <TableRow>
-                      <TableCell className="font-semibold">
-                        Foto de perfil:
-                      </TableCell>
-                      <TableCell>
-                        <input
-                          className="block w-full cursor-pointer rounded-lg border border-gray-300 bg-gray-50 text-sm text-gray-900"
-                          type="file"
-                          accept="image/*"
-                          disabled={!isEditing}
-                          onChange={(e) => {}}
-                        />
-                        <p
-                          class="mt-1 text-sm text-gray-500 dark:text-gray-300"
-                          id="file_input_help"
-                        >
-                          PNG ou JPG.
-                        </p>
-                      </TableCell>
-                    </TableRow>
-                  </TableBody>
-                </Table>
-                {!isEditing ? (
-                  <Button color="primary" variant="light" onPress={handleEdit}>
-                    Editar
-                  </Button>
-                ) : null}
-              </ModalBody>
-              <ModalFooter>
-                <Button
-                  color="danger"
-                  variant="light"
-                  onPress={() => {
-                    handleSave();
-                    onClose();
-                  }}
-                >
-                  Fechar
-                </Button>
-                {isEditing && (
-                  <Button
-                    color="primary"
-                    onPress={() => {
-                      handleSave();
-                    }}
-                  >
-                    Salvar alterações
-                  </Button>
-                )}
-              </ModalFooter>
-            </>
-          )}
-        </ModalContent>
-      </Modal>
-
-      <Modal size="3xl" isOpen={isDataOpen} onOpenChange={onDataOpenChange}>
-        <ModalContent>
-          {(onClose) => (
-            <>
-              <ModalHeader className="flex flex-col gap-1">
-                Meus dados
-              </ModalHeader>
-              <ModalBody className="border-b-1 border-gray-200">
-                <Table className="max-h-[600px]">
-                  <TableHeader>
-                    <TableColumn>Dados pessoais</TableColumn>
-                    <TableColumn></TableColumn>
-                  </TableHeader>
-                  <TableBody>
-                    {dados.map((item, index) => (
-                      <TableRow key={index}>
-                        <TableCell className="font-semibold">
-                          {item.item}
-                        </TableCell>
-                        <TableCell>
-                          <Input
-                            disabled={!isEditing}
-                            value={item.valor}
-                            type="text"
-                            variant="underlined"
-                            onChange={(e) =>
-                              handleInputChange(index, e.target.value)
-                            }
-                          ></Input>
-                        </TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-                {!isEditing ? (
-                  <Button color="primary" variant="light" onPress={handleEdit}>
-                    Editar
-                  </Button>
-                ) : null}
-              </ModalBody>
-              <ModalFooter>
-                <Button
-                  color="danger"
-                  variant="light"
-                  onPress={() => {
-                    handleSave();
-                    onClose();
-                  }}
-                >
-                  Fechar
-                </Button>
-                {isEditing && (
-                  <Button
-                    color="primary"
-                    onPress={() => {
-                      handleSave();
-                    }}
-                  >
-                    Salvar alterações
-                  </Button>
-                )}
-              </ModalFooter>
-            </>
-          )}
-        </ModalContent>
-      </Modal>
-      <Modal size="3xl" isOpen={isHelpOpen} onOpenChange={onHelpOpenChange}>
-        <ModalContent>
-          {(onClose) => (
-            <>
-              <ModalHeader className="flex flex-col gap-1">Ajuda</ModalHeader>
-              <ModalBody>
-                <p>
-                  Precisa de ajuda? Entre em contato com o nosso suporte técnico
-                  pelo e-mail suporte@univali.br ou pelo telefone (47)
-                  3341-7550.
-                </p>
-                <p>
-                  Para dúvidas sobre o uso da plataforma, acesse o nosso FAQ
-                  disponível na área de suporte do site.
-                </p>
-              </ModalBody>
-              <ModalFooter>
-                <Button
-                  color="danger"
-                  variant="flat"
-                  onPress={onClose}
-                  className="mr-3"
-                >
-                  Fechar
-                </Button>
-              </ModalFooter>
-            </>
-          )}
-        </ModalContent>
-      </Modal>
+      <HelpModal isOpen={isHelpOpen} onOpenChange={onHelpOpenChange} />
     </div>
   );
 }
