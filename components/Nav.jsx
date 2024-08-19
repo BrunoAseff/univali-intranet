@@ -68,8 +68,14 @@ export default function Nav() {
     { item: "Email: ", valor: "emaildoaluno@gmail.com" },
   ]);
 
+  const [config, setConfig] = useState([
+    {
+      src: "https://avatars.githubusercontent.com/u/155178870?v=4",
+      userName: "Nome do Aluno",
+    },
+  ]);
+
   const [isEditing, setIsEditing] = useState(false);
-  const [isEditingConfig, setIsEditingConfig] = useState(false);
 
   const handleInputChange = (index, newValue) => {
     const novosDados = [...dados];
@@ -81,16 +87,8 @@ export default function Nav() {
     setIsEditing(true);
   };
 
-  const handleEditConfig = () => {
-    setIsEditingConfig(true);
-  };
-
   const handleSave = () => {
     setIsEditing(false);
-  };
-
-  const handleSaveConfig = () => {
-    setIsEditingConfig(false);
   };
 
   const menuItems = [
@@ -164,13 +162,13 @@ export default function Nav() {
         </NavbarContent>
 
         <NavbarContent justify="end">
-          <h1 className="hidden lg:flex">Nome do Aluno</h1>
+          <h1 className="hidden lg:flex">{config.userName}</h1>
           <Dropdown backdrop="blur" placement="bottom-end">
             <DropdownTrigger>
               <Avatar
                 className="hover:cursor-pointer"
                 isBordered
-                src="https://avatars.githubusercontent.com/u/155178870?v=4"
+                src={config.src}
               />
             </DropdownTrigger>
             <DropdownMenu aria-label="Ações de perfil" variant="flat">
@@ -219,7 +217,7 @@ export default function Nav() {
         </NavbarMenu>
       </Navbar>
 
-      <Modal isOpen={isConfigOpen} onOpenChange={onConfigOpenChange}>
+      <Modal size="3xl" isOpen={isConfigOpen} onOpenChange={onConfigOpenChange}>
         <ModalContent>
           {(onClose) => (
             <>
@@ -239,7 +237,7 @@ export default function Nav() {
                       </TableCell>
                       <TableCell>
                         <Input
-                          disabled={!isEditingConfig}
+                          disabled={!isEditing}
                           value={"Nome do Aluno"}
                           variant="underlined"
                           onChange={(e) => {}}
@@ -254,7 +252,7 @@ export default function Nav() {
                           className="max-w-lg"
                           label="Senha"
                           value={"SenhaAleatoria123456"}
-                          disabled={!isEditingConfig}
+                          disabled={!isEditing}
                           variant="underlined"
                           endContent={
                             <button
@@ -288,35 +286,44 @@ export default function Nav() {
                       </TableCell>
                       <TableCell>
                         <input
+                          className="block w-full cursor-pointer rounded-lg border border-gray-300 bg-gray-50 text-sm text-gray-900"
                           type="file"
                           accept="image/*"
-                          disabled={!isEditingConfig}
+                          disabled={!isEditing}
                           onChange={(e) => {}}
                         />
+                        <p
+                          class="mt-1 text-sm text-gray-500 dark:text-gray-300"
+                          id="file_input_help"
+                        >
+                          PNG ou JPG.
+                        </p>
                       </TableCell>
                     </TableRow>
                   </TableBody>
                 </Table>
-                {!isEditingConfig ? (
-                  <Button
-                    color="primary"
-                    variant="light"
-                    onPress={handleEditConfig}
-                  >
+                {!isEditing ? (
+                  <Button color="primary" variant="light" onPress={handleEdit}>
                     Editar
                   </Button>
                 ) : null}
               </ModalBody>
               <ModalFooter>
-                <Button color="danger" variant="light" onPress={onClose}>
+                <Button
+                  color="danger"
+                  variant="light"
+                  onPress={() => {
+                    handleSave();
+                    onClose();
+                  }}
+                >
                   Fechar
                 </Button>
-                {isEditingConfig && (
+                {isEditing && (
                   <Button
                     color="primary"
                     onPress={() => {
-                      handleSaveConfig();
-                      onClose();
+                      handleSave();
                     }}
                   >
                     Salvar alterações
@@ -369,7 +376,14 @@ export default function Nav() {
                 ) : null}
               </ModalBody>
               <ModalFooter>
-                <Button color="danger" variant="light" onPress={onClose}>
+                <Button
+                  color="danger"
+                  variant="light"
+                  onPress={() => {
+                    handleSave();
+                    onClose();
+                  }}
+                >
                   Fechar
                 </Button>
                 {isEditing && (
@@ -377,7 +391,6 @@ export default function Nav() {
                     color="primary"
                     onPress={() => {
                       handleSave();
-                      onClose();
                     }}
                   >
                     Salvar alterações
@@ -388,33 +401,29 @@ export default function Nav() {
           )}
         </ModalContent>
       </Modal>
-      <Modal size="4xl" isOpen={isHelpOpen} onOpenChange={onHelpOpenChange}>
+      <Modal size="3xl" isOpen={isHelpOpen} onOpenChange={onHelpOpenChange}>
         <ModalContent>
           {(onClose) => (
             <>
               <ModalHeader className="flex flex-col gap-1">Ajuda</ModalHeader>
               <ModalBody>
                 <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Nullam pulvinar risus non risus hendrerit venenatis.
-                  Pellentesque sit amet hendrerit risus, sed porttitor quam.
+                  Precisa de ajuda? Entre em contato com o nosso suporte técnico
+                  pelo e-mail suporte@univali.br ou pelo telefone (47)
+                  3341-7550.
                 </p>
                 <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Nullam pulvinar risus non risus hendrerit venenatis.
-                  Pellentesque sit amet hendrerit risus, sed porttitor quam.
-                </p>
-                <p>
-                  Magna exercitation reprehenderit magna aute tempor cupidatat
-                  consequat elit dolor adipisicing. Mollit dolor eiusmod sunt ex
-                  incididunt cillum quis. Velit duis sit officia eiusmod Lorem
-                  aliqua enim laboris do dolor eiusmod. Et mollit incididunt
-                  nisi consectetur esse laborum eiusmod pariatur proident Lorem
-                  eiusmod et. Culpa deserunt nostrud ad veniam.
+                  Para dúvidas sobre o uso da plataforma, acesse o nosso FAQ
+                  disponível na área de suporte do site.
                 </p>
               </ModalBody>
               <ModalFooter>
-                <Button color="danger" variant="light" onPress={onClose}>
+                <Button
+                  color="danger"
+                  variant="flat"
+                  onPress={onClose}
+                  className="mr-3"
+                >
                   Fechar
                 </Button>
               </ModalFooter>

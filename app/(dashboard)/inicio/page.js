@@ -241,7 +241,11 @@ export default function Home() {
           </Card>
         </div>
       </div>
-      <Button className="mb-10" color="primary" onPress={onOpen}>
+      <Button
+        className="mb-10 hidden md:block"
+        color="primary"
+        onPress={onOpen}
+      >
         Assinar publicação por assunto
       </Button>
     </div>

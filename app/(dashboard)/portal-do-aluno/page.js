@@ -6,11 +6,11 @@ import Bolsas from "@/components/portal-do-aluno/Bolsas";
 import Integralizacao from "@/components/portal-do-aluno/Integralizacao";
 import Requisicoes from "@/components/portal-do-aluno/Requisicoes";
 import Matriz from "@/components/portal-do-aluno/Matriz";
-import {  PlusCircle } from "@phosphor-icons/react";
+import { PlusCircle } from "@phosphor-icons/react";
 
 export default function App() {
   return (
-    <div className="flex w-full flex-col">
+    <div className="flex w-full flex-col overflow-hidden">
       <div className="m-5 w-full p-4 md:ml-5 md:mt-5">
         <div>
           <SelectCourse />

@@ -4,10 +4,10 @@ import Background from "@/components/Background";
 
 export default function Layout({ children }) {
   return (
-    <div className="w-full h-screen">
+    <div>
       <Background />
       <Nav />
-      <main className="flex w-full h-screen flex-grow">{children}</main>
+      <main>{children}</main>
     </div>
   );
 }
