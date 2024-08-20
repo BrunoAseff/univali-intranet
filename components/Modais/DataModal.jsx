@@ -13,6 +13,7 @@ import {
   Input,
   Button,
   DateInput,
+  DatePicker,
 } from "@nextui-org/react";
 import { parseDate } from "@internationalized/date";
 
@@ -26,7 +27,12 @@ export function DataModal({
   handleInputChange,
 }) {
   return (
-    <Modal size="3xl" isOpen={isOpen} onOpenChange={onOpenChange}>
+    <Modal
+      size="4xl"
+      className="scale-90"
+      isOpen={isOpen}
+      onOpenChange={onOpenChange}
+    >
       <ModalContent>
         {(onClose) => (
           <>
@@ -73,18 +79,15 @@ export function DataModal({
                       Data de Nascimento:
                     </TableCell>
                     <TableCell>
-                      <DateInput
+                      <DatePicker
                         variant="underlined"
                         label={"Data de Nascimento"}
                         disabled={!isEditing}
                         value={parseDate(
                           dados[2].valor.split("/").reverse().join("-"),
-                        )} // Convertendo para "yyyy-MM-dd" e usando parseDate
+                        )}
                         onChange={(date) =>
-                          handleInputChange(
-                            2,
-                            date.toString(), // Convertendo de volta para string "yyyy-MM-dd"
-                          )
+                          handleInputChange(2, date.toString())
                         }
                         className="max-w-sm"
                       />
