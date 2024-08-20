@@ -22,7 +22,7 @@ export default function ConfigModal({
   config,
   handleEdit,
   handleSave,
-  handleInputChange,
+  handleConfigChange,
   setIsVisible,
   isVisible,
 }) {
@@ -51,7 +51,7 @@ export default function ConfigModal({
                         value={config.userName}
                         variant="underlined"
                         onChange={(e) =>
-                          handleInputChange("userName", e.target.value)
+                          handleConfigChange("userName", e.target.value)
                         }
                       />
                     </TableCell>
@@ -63,7 +63,7 @@ export default function ConfigModal({
                       <Input
                         className="max-w-lg"
                         label="Senha"
-                        value={"SenhaAleatoria123456"}
+                        value={config.password}
                         disabled={!isEditing}
                         variant="underlined"
                         endContent={
@@ -87,7 +87,9 @@ export default function ConfigModal({
                           </button>
                         }
                         type={isVisible ? "text" : "password"}
-                        onChange={(e) => {}}
+                        onChange={(e) =>
+                          handleConfigChange("password", e.target.value)
+                        } // Update the password
                       />
                     </TableCell>
                   </TableRow>
@@ -102,8 +104,15 @@ export default function ConfigModal({
                         type="file"
                         accept="image/*"
                         disabled={!isEditing}
-                        onChange={(e) => {}}
+                        onChange={(e) => {
+                          const file = e.target.files[0];
+                          if (file) {
+                            const imageUrl = URL.createObjectURL(file); // Create a URL for the selected file
+                            handleConfigChange("src", imageUrl); // Update the profile picture URL
+                          }
+                        }}
                       />
+
                       <p className="mt-1 text-sm text-gray-500 dark:text-gray-300">
                         PNG ou JPG.
                       </p>

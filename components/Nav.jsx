@@ -47,8 +47,6 @@ import ConfigModal from "./Modais/ConfigModal";
 export default function Nav() {
   const [isVisible, setIsVisible] = useState(false);
 
-  const toggleVisibility = () => setIsVisible(!isVisible);
-
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { isOpen: isConfigOpen, onOpenChange: onConfigOpenChange } =
     useDisclosure();
@@ -71,12 +69,11 @@ export default function Nav() {
     { item: "Email: ", valor: "emaildoaluno@gmail.com" },
   ]);
 
-  const [config, setConfig] = useState([
-    {
-      src: "https://avatars.githubusercontent.com/u/155178870?v=4",
-      userName: "Nome do Aluno",
-    },
-  ]);
+  const [config, setConfig] = useState({
+    src: "https://avatars.githubusercontent.com/u/155178870?v=4",
+    userName: "Nome do Aluno",
+    password: "SenhaAleatoria123456",
+  });
 
   const [isEditing, setIsEditing] = useState(false);
 
@@ -84,6 +81,13 @@ export default function Nav() {
     const novosDados = [...dados];
     novosDados[index].valor = newValue;
     setDados(novosDados);
+  };
+
+  const handleConfigChange = (key, newValue) => {
+    setConfig((prevConfig) => ({
+      ...prevConfig,
+      [key]: newValue,
+    }));
   };
 
   const handleEdit = () => {
@@ -165,13 +169,13 @@ export default function Nav() {
         </NavbarContent>
 
         <NavbarContent justify="end">
-          <h1 className="hidden lg:flex">{config[0].userName}</h1>
+          <h1 className="hidden lg:flex">{config.userName}</h1>
           <Dropdown backdrop="blur" placement="bottom-end">
             <DropdownTrigger>
               <Avatar
                 className="hover:cursor-pointer"
                 isBordered
-                src={config[0].src}
+                src={config.src}
               />
             </DropdownTrigger>
             <DropdownMenu aria-label="Ações de perfil" variant="flat">
@@ -227,7 +231,7 @@ export default function Nav() {
         config={config}
         handleEdit={handleEdit}
         handleSave={handleSave}
-        handleInputChange={handleInputChange}
+        handleConfigChange={handleConfigChange}
         setIsVisible={setIsVisible}
         isVisible={isVisible}
       />
