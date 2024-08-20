@@ -12,9 +12,9 @@ import {
   TableCell,
   Input,
   Button,
-  DateInput,
   DatePicker,
 } from "@nextui-org/react";
+import React, { useMemo, useState } from "react";
 import { parseDate } from "@internationalized/date";
 
 export function DataModal({
@@ -26,10 +26,69 @@ export function DataModal({
   handleSave,
   handleInputChange,
 }) {
+  // Estado para armazenar os dados originais
+  const [backupData, setBackupData] = useState([]);
+
+  // Funções de validação para cada campo
+  const validateEmail = (value) =>
+    /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value);
+
+  const validateCPF = (value) => value.length === 11;
+
+  const validatePhone = (value) => value.length >= 8 && value.length <= 11;
+
+  const validateCell = (value) => value.length === 11;
+
+  const validateDate = (value) => {
+    const [year, month, day] = value.split("-");
+    return year.length === 4 && !isNaN(Date.parse(`${year}-${month}-${day}`));
+  };
+
+  const isInvalid = (index) => {
+    switch (index) {
+      case 0:
+      case 1:
+      case 3:
+        return dados[index].valor.length === 0;
+      case 2:
+        return !validateDate(dados[index].valor);
+      case 4:
+        return !validateCPF(dados[index].valor);
+      case 5:
+        return !validatePhone(dados[index].valor);
+      case 6:
+        return !validateCell(dados[index].valor);
+      case 7:
+        return !validateEmail(dados[index].valor);
+      default:
+        return false;
+    }
+  };
+
+  const isFormInvalid = () => {
+    return dados.some((_, index) => isInvalid(index));
+  };
+
+  const handleEditClick = () => {
+    // Salvar o estado atual dos dados antes de entrar no modo de edição
+    setBackupData(dados.map((d) => ({ ...d })));
+    handleEdit();
+  };
+
+  const handleClose = (onClose) => {
+    // Restaurar os dados a partir do backup se o modal for fechado sem salvar
+    if (isEditing) {
+      dados.forEach((d, index) => {
+        handleInputChange(index, backupData[index].valor);
+      });
+    }
+    onClose();
+  };
+
   return (
     <Modal
       size="4xl"
-      className="scale-90"
+      className="scale-85"
       isOpen={isOpen}
       onOpenChange={onOpenChange}
     >
@@ -56,6 +115,8 @@ export function DataModal({
                         value={dados[0].valor}
                         type="text"
                         variant="underlined"
+                        isInvalid={isInvalid(0)}
+                        errorMessage="Campo obrigatório."
                         onChange={(e) => handleInputChange(0, e.target.value)}
                       />
                     </TableCell>
@@ -69,6 +130,8 @@ export function DataModal({
                         value={dados[1].valor}
                         type="text"
                         variant="underlined"
+                        isInvalid={isInvalid(1)}
+                        errorMessage="Campo obrigatório."
                         onChange={(e) => handleInputChange(1, e.target.value)}
                       />
                     </TableCell>
@@ -82,7 +145,7 @@ export function DataModal({
                       <DatePicker
                         variant="underlined"
                         label={"Data de Nascimento"}
-                        disabled={!isEditing}
+                        isDisabled={!isEditing}
                         value={parseDate(
                           dados[2].valor.split("/").reverse().join("-"),
                         )}
@@ -90,6 +153,7 @@ export function DataModal({
                           handleInputChange(2, date.toString())
                         }
                         className="max-w-sm"
+                        errorMessage="Data inválida."
                       />
                     </TableCell>
                   </TableRow>
@@ -104,6 +168,8 @@ export function DataModal({
                         value={dados[3].valor}
                         type="text"
                         variant="underlined"
+                        isInvalid={isInvalid(3)}
+                        errorMessage="Campo obrigatório."
                         onChange={(e) => handleInputChange(3, e.target.value)}
                       />
                     </TableCell>
@@ -117,6 +183,8 @@ export function DataModal({
                         value={dados[4].valor}
                         type="text"
                         variant="underlined"
+                        isInvalid={isInvalid(4)}
+                        errorMessage="CPF inválido. Deve conter 11 dígitos."
                         onChange={(e) => handleInputChange(4, e.target.value)}
                       />
                     </TableCell>
@@ -130,6 +198,8 @@ export function DataModal({
                         value={dados[5].valor}
                         type="tel"
                         variant="underlined"
+                        isInvalid={isInvalid(5)}
+                        errorMessage="Telefone inválido. Deve conter entre 8 e 11 dígitos."
                         onChange={(e) => handleInputChange(5, e.target.value)}
                       />
                     </TableCell>
@@ -143,6 +213,8 @@ export function DataModal({
                         value={dados[6].valor}
                         type="tel"
                         variant="underlined"
+                        isInvalid={isInvalid(6)}
+                        errorMessage="Celular inválido. Deve conter 11 dígitos."
                         onChange={(e) => handleInputChange(6, e.target.value)}
                       />
                     </TableCell>
@@ -156,6 +228,8 @@ export function DataModal({
                         value={dados[7].valor}
                         type="email"
                         variant="underlined"
+                        isInvalid={isInvalid(7)}
+                        errorMessage="Insira um email válido."
                         onChange={(e) => handleInputChange(7, e.target.value)}
                       />
                     </TableCell>
@@ -173,7 +247,6 @@ export function DataModal({
                 color="danger"
                 variant="light"
                 onPress={() => {
-                  handleSave();
                   onClose();
                 }}
               >
@@ -183,7 +256,9 @@ export function DataModal({
                 <Button
                   color="primary"
                   onPress={() => {
-                    handleSave();
+                    if (!isFormInvalid()) {
+                      handleSave();
+                    }
                   }}
                 >
                   Salvar alterações

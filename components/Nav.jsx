@@ -61,11 +61,11 @@ export default function Nav() {
   const [dados, setDados] = useState([
     { item: "Código de Pessoa: ", valor: "9659862" },
     { item: "Nome: ", valor: "Nome do Aluno" },
-    { item: "Data de Nascimento: ", valor: "03/08/1999" },
+    { item: "Data de Nascimento: ", valor: "03/08/2002" },
     { item: "Nome da Mãe: ", valor: "Nome da mãe do aluno" },
-    { item: "CPF: ", valor: "694.368.493-19" },
-    { item: "Telefone: ", valor: "9999999" },
-    { item: "Celular: ", valor: "9999999" },
+    { item: "CPF: ", valor: "69436849319" },
+    { item: "Telefone: ", valor: "3363947584" },
+    { item: "Celular: ", valor: "47996493791" },
     { item: "Email: ", valor: "emaildoaluno@gmail.com" },
   ]);
 
@@ -78,6 +78,7 @@ export default function Nav() {
   const [isEditing, setIsEditing] = useState(false);
 
   const handleInputChange = (index, newValue) => {
+    console.log([...dados]);
     const novosDados = [...dados];
     novosDados[index].valor = newValue;
     setDados(novosDados);
