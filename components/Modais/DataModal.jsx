@@ -25,6 +25,7 @@ export function DataModal({
   handleEdit,
   handleSave,
   handleInputChange,
+  setIsEditing, // Add this prop to control the editing state
 }) {
   // Estado para armazenar os dados originais
   const [backupData, setBackupData] = useState([]);
@@ -81,17 +82,13 @@ export function DataModal({
       dados.forEach((d, index) => {
         handleInputChange(index, backupData[index].valor);
       });
+      setIsEditing(false); // Set isEditing to false
     }
     onClose();
   };
 
   return (
-    <Modal
-      size="4xl"
-      className="scale-85"
-      isOpen={isOpen}
-      onOpenChange={onOpenChange}
-    >
+    <Modal size="4xl" isOpen={isOpen} onOpenChange={onOpenChange}>
       <ModalContent>
         {(onClose) => (
           <>
@@ -145,6 +142,7 @@ export function DataModal({
                       <DatePicker
                         variant="underlined"
                         label={"Data de Nascimento"}
+                        isInvalid={false}
                         isDisabled={!isEditing}
                         value={parseDate(
                           dados[2].valor.split("/").reverse().join("-"),
@@ -237,7 +235,11 @@ export function DataModal({
                 </TableBody>
               </Table>
               {!isEditing ? (
-                <Button color="primary" variant="light" onPress={handleEdit}>
+                <Button
+                  color="primary"
+                  variant="light"
+                  onPress={handleEditClick}
+                >
                   Editar
                 </Button>
               ) : null}
@@ -246,9 +248,7 @@ export function DataModal({
               <Button
                 color="danger"
                 variant="light"
-                onPress={() => {
-                  onClose();
-                }}
+                onPress={() => handleClose(onClose)} // Use handleClose to close the modal and reset editing state
               >
                 Fechar
               </Button>

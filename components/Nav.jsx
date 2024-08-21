@@ -16,30 +16,10 @@ import {
   DropdownItem,
   DropdownTrigger,
   useDisclosure,
-  Modal,
-  ModalContent,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
-  Button,
-  Table,
-  TableHeader,
-  TableColumn,
-  TableBody,
-  TableRow,
-  TableCell,
-  Input,
 } from "@nextui-org/react";
 import { Image } from "@nextui-org/image";
 import { usePathname, useRouter } from "next/navigation";
-import {
-  SignOut,
-  GearSix,
-  Key,
-  QuestionMark,
-  Eye,
-  EyeSlash,
-} from "@phosphor-icons/react";
+import { SignOut, GearSix, Key, QuestionMark } from "@phosphor-icons/react";
 import HelpModal from "./Modais/HelpModal";
 import { DataModal } from "./Modais/DataModal";
 import ConfigModal from "./Modais/ConfigModal";
@@ -84,10 +64,10 @@ export default function Nav() {
     setDados(novosDados);
   };
 
-  const handleConfigChange = (key, newValue) => {
+  const handleConfigChange = (newConfig) => {
     setConfig((prevConfig) => ({
       ...prevConfig,
-      [key]: newValue,
+      ...newConfig,
     }));
   };
 
@@ -235,6 +215,7 @@ export default function Nav() {
         handleConfigChange={handleConfigChange}
         setIsVisible={setIsVisible}
         isVisible={isVisible}
+        setIsEditing={setIsEditing}
       />
 
       <DataModal
@@ -245,6 +226,7 @@ export default function Nav() {
         handleEdit={handleEdit}
         handleSave={handleSave}
         handleInputChange={handleInputChange}
+        setIsEditing={setIsEditing}
       />
 
       <HelpModal isOpen={isHelpOpen} onOpenChange={onHelpOpenChange} />

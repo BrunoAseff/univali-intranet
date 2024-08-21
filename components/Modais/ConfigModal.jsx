@@ -14,6 +14,7 @@ import {
   Button,
 } from "@nextui-org/react";
 import { Eye, EyeSlash } from "@phosphor-icons/react";
+import { useState, useEffect } from "react";
 
 export default function ConfigModal({
   isOpen,
@@ -25,9 +26,33 @@ export default function ConfigModal({
   handleConfigChange,
   setIsVisible,
   isVisible,
+  setIsEditing, // Add this prop to control the editing state
 }) {
+  const [tempConfig, setTempConfig] = useState(config);
+
+  useEffect(() => {
+    if (isOpen) {
+      setTempConfig(config); // Atualiza tempConfig quando o modal é aberto
+    }
+  }, [config, isOpen]);
+
+  const handleTempConfigChange = (field, value) => {
+    setTempConfig((prev) => ({ ...prev, [field]: value }));
+  };
+
+  const handleSaveChanges = () => {
+    handleConfigChange(tempConfig); // Aplica as mudanças do estado temporário ao estado final
+    handleSave();
+  };
+
+  const handleCloseModal = () => {
+    setTempConfig(config); // Reverte o estado temporário para o estado original
+    setIsEditing(false); // Set isEditing to false
+    onOpenChange(false); // Fecha o modal
+  };
+
   return (
-    <Modal size="3xl" isOpen={isOpen} onOpenChange={onOpenChange}>
+    <Modal size="3xl" isOpen={isOpen} onOpenChange={handleCloseModal}>
       <ModalContent>
         {(onClose) => (
           <>
@@ -48,10 +73,10 @@ export default function ConfigModal({
                     <TableCell>
                       <Input
                         disabled={!isEditing}
-                        value={config.userName}
+                        value={tempConfig.userName}
                         variant="underlined"
                         onChange={(e) =>
-                          handleConfigChange("userName", e.target.value)
+                          handleTempConfigChange("userName", e.target.value)
                         }
                       />
                     </TableCell>
@@ -63,7 +88,7 @@ export default function ConfigModal({
                       <Input
                         className="max-w-lg"
                         label="Senha"
-                        value={config.password}
+                        value={tempConfig.password}
                         disabled={!isEditing}
                         variant="underlined"
                         endContent={
@@ -88,8 +113,8 @@ export default function ConfigModal({
                         }
                         type={isVisible ? "text" : "password"}
                         onChange={(e) =>
-                          handleConfigChange("password", e.target.value)
-                        } // Update the password
+                          handleTempConfigChange("password", e.target.value)
+                        }
                       />
                     </TableCell>
                   </TableRow>
@@ -107,12 +132,11 @@ export default function ConfigModal({
                         onChange={(e) => {
                           const file = e.target.files[0];
                           if (file) {
-                            const imageUrl = URL.createObjectURL(file); // Create a URL for the selected file
-                            handleConfigChange("src", imageUrl); // Update the profile picture URL
+                            const imageUrl = URL.createObjectURL(file);
+                            handleTempConfigChange("src", imageUrl);
                           }
                         }}
                       />
-
                       <p className="mt-1 text-sm text-gray-500 dark:text-gray-300">
                         PNG ou JPG.
                       </p>
@@ -130,10 +154,7 @@ export default function ConfigModal({
               <Button
                 color="danger"
                 variant="light"
-                onPress={() => {
-                  handleSave();
-                  onClose();
-                }}
+                onPress={handleCloseModal} // Use handleCloseModal to close the modal and reset editing state
               >
                 Fechar
               </Button>
@@ -141,7 +162,8 @@ export default function ConfigModal({
                 <Button
                   color="primary"
                   onPress={() => {
-                    handleSave();
+                    handleSaveChanges(); // Salva as alterações
+                    onClose(); // Fecha o modal após salvar
                   }}
                 >
                   Salvar alterações
