@@ -91,7 +91,7 @@ export default function Nav() {
   };
 
   return (
-    <div className="flex w-full shrink-0 flex-grow">
+    <div className="flex w-full shrink-0">
       <Navbar
         className="space-between m-0 flex w-full"
         isBordered

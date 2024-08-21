@@ -41,8 +41,7 @@ export function DataModal({
   const validateCell = (value) => value.length === 11;
 
   const validateDate = (value) => {
-    const [year, month, day] = value.split("-");
-    return year.length === 4 && !isNaN(Date.parse(`${year}-${month}-${day}`));
+    return value ? true : false;
   };
 
   const isInvalid = (index) => {
@@ -88,15 +87,20 @@ export function DataModal({
   };
 
   return (
-    <Modal size="4xl" isOpen={isOpen} onOpenChange={onOpenChange}>
-      <ModalContent>
+    <Modal
+      size="3xl"
+      className="m-2 flex max-h-[98vh] flex-col justify-center"
+      isOpen={isOpen}
+      onOpenChange={onOpenChange}
+    >
+      <ModalContent className="flex flex-col">
         {(onClose) => (
           <>
             <ModalHeader className="flex flex-col gap-1">
               Meus dados
             </ModalHeader>
             <ModalBody className="border-b-1 border-gray-200">
-              <Table className="max-h-[600px]">
+              <Table hideHeader className="max-h-[600px]">
                 <TableHeader>
                   <TableColumn>Dados pessoais</TableColumn>
                   <TableColumn></TableColumn>
@@ -141,7 +145,6 @@ export function DataModal({
                     <TableCell>
                       <DatePicker
                         variant="underlined"
-                        label={"Data de Nascimento"}
                         isInvalid={false}
                         isDisabled={!isEditing}
                         value={parseDate(
