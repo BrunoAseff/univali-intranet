@@ -3,7 +3,7 @@
 import { Image } from "@nextui-org/react";
 import { Button } from "@nextui-org/react";
 import { Input } from "@nextui-org/react";
-
+import LoginModal from "@/components/Modais/LoginModal";
 import { useState } from "react";
 import { Link } from "@nextui-org/react";
 import {
@@ -22,6 +22,7 @@ export default function Home() {
 
   return (
     <div className="flex h-screen max-h-screen w-full text-sm">
+      <LoginModal />
       <div className="hidden w-1/2 items-center justify-center bg-[conic-gradient(at_left,_var(--tw-gradient-stops))] from-sky-100 via-blue-300 to-blue-500 md:flex">
         <Image
           radius="none"
