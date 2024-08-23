@@ -9,6 +9,7 @@ import {
   useDisclosure,
 } from "@nextui-org/react";
 import { Link } from "@nextui-org/react";
+import { GithubLogo } from "@phosphor-icons/react";
 
 export default function LoginModal() {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
@@ -51,7 +52,21 @@ export default function LoginModal() {
                   .
                 </p>
               </ModalBody>
-              <ModalFooter>
+              <ModalFooter className="flex justify-between">
+                <Link
+                  href="https://github.com/brunoaseff/univali-intranet"
+                  target="_blank"
+                >
+                  <Button
+                    variant="light"
+                    isIconOnly
+                    color="default"
+                    onPress={onClose}
+                  >
+                    <GithubLogo size={30} />
+                  </Button>
+                </Link>
+
                 <Button color="primary" onPress={onClose}>
                   Entendi!
                 </Button>
