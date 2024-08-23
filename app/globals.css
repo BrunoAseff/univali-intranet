@@ -8,6 +8,11 @@
   font-smoothing: antialiasied;
 }
 
+*:focus {
+  outline: 2px solid #006fee;
+  outline-offset: 2px;
+}
+
 body,
 html {
   width: 100%;

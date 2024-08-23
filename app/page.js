@@ -21,8 +21,8 @@ export default function Home() {
   const toggleVisibility = () => setIsVisible(!isVisible);
 
   return (
-    <div className="w-full h-screen flex">
-      <div className="w-1/2 hidden md:flex bg-[conic-gradient(at_left,_var(--tw-gradient-stops))] from-sky-100 via-blue-300 to-blue-500  items-center justify-center">
+    <div className="flex h-screen max-h-screen w-full text-sm">
+      <div className="hidden w-1/2 items-center justify-center bg-[conic-gradient(at_left,_var(--tw-gradient-stops))] from-sky-100 via-blue-300 to-blue-500 md:flex">
         <Image
           radius="none"
           width={200}
@@ -31,20 +31,20 @@ export default function Home() {
           src="/univali.png"
         />
       </div>
-      <div className=" w-1/2 flex items-start justify-center flex-col gap-4 p-12 grow">
-        <div className=" w-full flex justify-center items-center">
+      <div className="flex w-1/2 grow flex-col items-start justify-center gap-3 p-6 md:p-12">
+        <div className="flex w-full items-center justify-center">
           <Image
             radius="none"
             width={200}
             height={142}
             alt="Logo da Univali"
             src="/univali.png"
-            className="md:hidden scale-50 sm:scale-80 md:scale-100 "
+            className="scale-50 sm:scale-80 md:hidden md:scale-100"
           />
         </div>
-        <h1 className="font-bold  md:mb-6	md:text-4xl  text-2xl">Bem-vindo!</h1>
+        <h1 className="text-2xl font-bold md:mb-6 md:text-4xl">Bem-vindo!</h1>
         <Input
-          className="max-w-lg	"
+          className="max-w-lg"
           type="email"
           label="Email"
           variant="bordered"
@@ -65,12 +65,12 @@ export default function Home() {
               {isVisible ? (
                 <Eye
                   size={32}
-                  className="text-default-400 pointer-events-none"
+                  className="pointer-events-none text-default-400"
                 />
               ) : (
                 <EyeSlash
                   size={32}
-                  className="text-default-400 pointer-events-none"
+                  className="pointer-events-none text-default-400"
                 />
               )}
             </button>
@@ -80,21 +80,23 @@ export default function Home() {
         <Button variant="shadow" color="primary">
           Entrar
         </Button>{" "}
-        <div className="mt-6 flex flex-col">
-          <Link href="#">Esqueci meu código de pessoa.</Link>
-          <Link className="mb-6" href="#">
+        <div className="mt-3 flex flex-col md:mt-6">
+          <Link className="mb-2 text-sm" href="#">
+            Esqueci meu código de pessoa.
+          </Link>
+          <Link className="mb-3 text-sm md:mb-6" href="#">
             Esqueci minha senha.
           </Link>
-          <Link href="#">
+          <Link className="text-sm" href="#">
             Você é Egresso e não tem Código de Pessoa? Solicite aqui.
           </Link>
 
-          <p className="mt-12 text-center max-w-lg">
+          <p className="mt-8 max-w-lg text-center md:mt-12">
             Caso encontre problemas para efetuar o login entre em contato com a
             Central de Atendimento <strong> 0800 723 1300</strong>
           </p>
 
-          <div className="flex mt-12 text-center w-full items-center justify-center gap-4">
+          <div className="mt-8 flex w-full items-center justify-center gap-2 text-center md:mt-12 md:gap-4">
             <Link isExternal href="https://www.instagram.com/UnivaliOnline/">
               <InstagramLogo size={32} />
             </Link>
