@@ -25,7 +25,7 @@ export function DataModal({
   handleEdit,
   handleSave,
   handleInputChange,
-  setIsEditing, // Add this prop to control the editing state
+  setIsEditing,
 }) {
   // Estado para armazenar os dados originais
   const [backupData, setBackupData] = useState([]);
@@ -81,7 +81,7 @@ export function DataModal({
       dados.forEach((d, index) => {
         handleInputChange(index, backupData[index].valor);
       });
-      setIsEditing(false); // Set isEditing to false
+      setIsEditing(false);
     }
     onClose();
   };
@@ -251,7 +251,7 @@ export function DataModal({
               <Button
                 color="danger"
                 variant="light"
-                onPress={() => handleClose(onClose)} // Use handleClose to close the modal and reset editing state
+                onPress={() => handleClose(onClose)}
               >
                 Fechar
               </Button>

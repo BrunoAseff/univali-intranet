@@ -26,13 +26,13 @@ export default function ConfigModal({
   handleConfigChange,
   setIsVisible,
   isVisible,
-  setIsEditing, // Add this prop to control the editing state
+  setIsEditing,
 }) {
   const [tempConfig, setTempConfig] = useState(config);
 
   useEffect(() => {
     if (isOpen) {
-      setTempConfig(config); // Atualiza tempConfig quando o modal é aberto
+      setTempConfig(config);
     }
   }, [config, isOpen]);
 
@@ -41,14 +41,14 @@ export default function ConfigModal({
   };
 
   const handleSaveChanges = () => {
-    handleConfigChange(tempConfig); // Aplica as mudanças do estado temporário ao estado final
+    handleConfigChange(tempConfig);
     handleSave();
   };
 
   const handleCloseModal = () => {
-    setTempConfig(config); // Reverte o estado temporário para o estado original
-    setIsEditing(false); // Set isEditing to false
-    onOpenChange(false); // Fecha o modal
+    setTempConfig(config);
+    setIsEditing(false);
+    onOpenChange(false);
   };
 
   return (
@@ -151,19 +151,15 @@ export default function ConfigModal({
               ) : null}
             </ModalBody>
             <ModalFooter>
-              <Button
-                color="danger"
-                variant="light"
-                onPress={handleCloseModal} // Use handleCloseModal to close the modal and reset editing state
-              >
+              <Button color="danger" variant="light" onPress={handleCloseModal}>
                 Fechar
               </Button>
               {isEditing && (
                 <Button
                   color="primary"
                   onPress={() => {
-                    handleSaveChanges(); // Salva as alterações
-                    onClose(); // Fecha o modal após salvar
+                    handleSaveChanges();
+                    onClose();
                   }}
                 >
                   Salvar alterações

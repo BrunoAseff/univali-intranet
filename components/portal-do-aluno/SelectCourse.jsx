@@ -14,11 +14,11 @@ export default function SelectCourse() {
 
   if (loading) {
     return (
-      <div className="max-w-[300px] w-full flex items-center gap-3">
+      <div className="flex w-full max-w-[300px] items-center gap-3">
         <div>
-          <Skeleton className="flex rounded-full w-12 h-12" />
+          <Skeleton className="flex h-12 w-12 rounded-full" />
         </div>
-        <div className="w-full flex flex-col gap-2">
+        <div className="flex w-full flex-col gap-2">
           <Skeleton className="h-3 w-3/5 rounded-lg" />
           <Skeleton className="h-3 w-4/5 rounded-lg" />
         </div>
@@ -32,11 +32,8 @@ export default function SelectCourse() {
 
   const courseDetails = courses.find((course) => course.id == selectedCourse);
 
-  console.log("courseDetails:", courseDetails);
-  console.log("selectedCourse:", selectedCourse);
-
   return (
-    <div className="bg-transparent flex-col md:flex-row flex w-full flex-wrap md:flex-nowrap gap-6 items-center ">
+    <div className="flex w-full flex-col flex-wrap items-center gap-6 bg-transparent md:flex-row md:flex-nowrap">
       <Select
         variant="underlined"
         color="primary"
@@ -53,14 +50,14 @@ export default function SelectCourse() {
       </Select>
 
       {courseDetails && (
-        <div className="flex gap-6 md:gap-10 ">
-          <div className="flex flex-col md:flex-row gap-2 z-50 p-2 rounded-lg items-center">
-            <p className=" text-nowrap z-50">Id do curso: </p>
+        <div className="flex gap-6 md:gap-10">
+          <div className="z-50 flex flex-col items-center gap-2 rounded-lg p-2 md:flex-row">
+            <p className="z-50 text-nowrap">Id do curso: </p>
             <Chip variant="bordered" color="primary" radius="sm">
               {courseDetails.id}
             </Chip>
           </div>
-          <div className="flex flex-col md:flex-row gap-2 z-50 p-2 rounded-lg items-center">
+          <div className="z-50 flex flex-col items-center gap-2 rounded-lg p-2 md:flex-row">
             <p className="z-50">Graduação: </p>{" "}
             <Chip variant="bordered" color="primary" radius="sm">
               {" "}
@@ -68,14 +65,14 @@ export default function SelectCourse() {
             </Chip>
           </div>
 
-          <div className="flex flex-col md:flex-row  gap-2 z-50 p-2 rounded-lg items-center">
+          <div className="z-50 flex flex-col items-center gap-2 rounded-lg p-2 md:flex-row">
             <p className="z-50"> Modo: </p>{" "}
             <Chip variant="bordered" color="primary" radius="sm">
               {courseDetails.mode}
             </Chip>
           </div>
           {courseDetails.special && (
-            <div className="flex flex-col md:flex-row gap-2 z-50 p-2 rounded-lg items-center">
+            <div className="z-50 flex flex-col items-center gap-2 rounded-lg p-2 md:flex-row">
               <p className="z-50">Especial:</p>
               <Chip variant="bordered" color="primary" radius="sm">
                 {courseDetails.special}

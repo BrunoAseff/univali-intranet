@@ -18,14 +18,7 @@ import {
   Select,
   SelectItem,
 } from "@nextui-org/react";
-import {
-  CalendarBlank,
-  Exam,
-  ListDashes,
-  Receipt,
-  Signature,
-  TipJar,
-} from "@phosphor-icons/react";
+import { Receipt, Signature, TipJar } from "@phosphor-icons/react";
 
 export default function Financeiro() {
   const [selected, setSelected] = useState("Notas");
@@ -39,8 +32,8 @@ export default function Financeiro() {
 
   if (loading) {
     return (
-      <Card className=" w-[500px] space-y-5 mt-5 p-4" radius="sm">
-        <Skeleton className=" rounded-lg">
+      <Card className="mt-5 w-[500px] space-y-5 p-4" radius="sm">
+        <Skeleton className="rounded-lg">
           <div className="h-24 rounded-lg bg-default-300"></div>
         </Skeleton>
         <div className="space-y-3">
@@ -62,12 +55,12 @@ export default function Financeiro() {
     <Card
       radius="sm"
       shadow="none"
-      className="flexflex-wrap mt-5  mr-10 max-w-screen-sm  p-5"
+      className="flexflex-wrap mr-10 mt-5 max-w-screen-sm p-5 md:min-w-[600px]"
     >
       <CardHeader>
         <strong>FINANCEIRO</strong>
       </CardHeader>
-      <div className="flex w-full flex-col ">
+      <div className="flex w-full flex-col">
         <Tabs
           aria-label="Options"
           color="primary"
@@ -78,7 +71,7 @@ export default function Financeiro() {
           <Tab
             key="Boletos"
             title={
-              <div className=" flex items-center space-x-2">
+              <div className="flex items-center space-x-2">
                 <Receipt />
                 <span>Boletos</span>
               </div>
@@ -145,7 +138,7 @@ export default function Financeiro() {
                     </TableRow>
                   </TableBody>
                 </Table>
-                <div className="mt-8  items-center justify-center flex gap-6">
+                <div className="mt-8 flex items-center justify-center gap-6">
                   <Button
                     href=""
                     as={Link}
@@ -179,9 +172,9 @@ export default function Financeiro() {
             }
           >
             <Card className="md:min-w-[500px]" shadow="none">
-              <CardBody className="flex p-10 flex-col items-center justify-center gap-6">
-                <div className="w-full flex flex-col mb-2 gap-4 border-b-1 border-default pb-10">
-                  <div className="flex  justify-between">
+              <CardBody className="flex flex-col items-center justify-center gap-6 p-10">
+                <div className="mb-2 flex w-full flex-col gap-4 border-b-1 border-default pb-10">
+                  <div className="flex justify-between">
                     <h1 className="font-bold">Imposto de renda</h1>
                     <Select
                       labelPlacement="outside-left"
@@ -206,8 +199,8 @@ export default function Financeiro() {
                   </div>
                 </div>
 
-                <div className="w-full flex flex-col  gap-4 ">
-                  <div className="flex  justify-between">
+                <div className="flex w-full flex-col gap-4">
+                  <div className="flex justify-between">
                     <h1 className="font-bold">Quitação anual</h1>
                     <Select
                       labelPlacement="outside-left"
@@ -240,8 +233,8 @@ export default function Financeiro() {
               </div>
             }
           >
-            <Card shadow="none" className="items-center">
-              <CardBody className="flex gap-10 justify-center items-center">
+            <Card shadow="none" className="mt-10 items-center">
+              <CardBody className="flex items-center gap-10">
                 <Select
                   labelPlacement="outside-left"
                   color="primary"

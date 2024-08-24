@@ -21,8 +21,8 @@ export default function App() {
         </div>
       </div>
 
-      <div className="z-50 mt-5 w-full items-center justify-center border-t-2 border-primary bg-gradient-to-b from-blue-100 to-blue-50">
-        <div className="ml-auto mr-auto mt-5 flex max-w-[1250px] items-center gap-1 rounded-full bg-white pb-2 pt-2">
+      <div className="z-50 mt-5 w-full items-center justify-center border-t-1 border-slate-400 bg-gradient-to-b from-blue-100 to-blue-50">
+        <div className="ml-auto mr-auto mt-5 flex max-w-[1250px] items-center gap-1 rounded-full bg-white pb-4 pt-4">
           <PlusCircle
             size={28}
             color="#006FEE"
