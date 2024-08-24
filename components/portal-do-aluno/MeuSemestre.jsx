@@ -74,7 +74,7 @@ export default function MeuSemestre() {
 
   if (loading) {
     return (
-      <Card className="w-[500px] space-y-5 mt-5 p-4" radius="sm">
+      <Card className="mt-5 w-[500px] space-y-5 p-4" radius="sm">
         <Skeleton className="rounded-lg">
           <div className="h-24 rounded-lg bg-default-300"></div>
         </Skeleton>
@@ -97,7 +97,7 @@ export default function MeuSemestre() {
     <Card
       radius="sm"
       shadow="none"
-      className=" flex flex-wrap md:mt-5 md:mr-10 max-w-screen-sm min-h-96 bg-background md:p-5"
+      className="flex min-h-96 max-w-screen-sm flex-wrap bg-background md:mr-10 md:mt-5 md:p-5"
     >
       <CardHeader>
         <strong>MEU SEMESTRE</strong>
@@ -126,7 +126,7 @@ export default function MeuSemestre() {
                   variant="underlined"
                   size="sm"
                   label="Ano/semestre"
-                  className="max-w-36 mb-5"
+                  className="mb-5 max-w-36"
                   onChange={(e) => setSelectedPeriod(e.target.value)}
                   value={selectedPeriod}
                 >
@@ -194,7 +194,7 @@ export default function MeuSemestre() {
                   variant="underlined"
                   size="sm"
                   label="Ano/semestre"
-                  className="max-w-36 mb-5"
+                  className="mb-5 max-w-36"
                   onChange={(e) => setSelectedPeriod(e.target.value)}
                   value={selectedPeriod}
                 >
@@ -283,7 +283,7 @@ export default function MeuSemestre() {
                         m1,
                         m2,
                         m3,
-                        absences
+                        absences,
                       );
 
                       return (
